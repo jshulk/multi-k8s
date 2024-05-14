@@ -1,0 +1,15 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t vjunloc/react-test -f ./client/Dockerfile.dev ./client
+script:
+  - docker run -e CI=true vjunloc/react-test npm test
+
+after_success:
+  - docker build -t vjunloc/multi-client  ./client
+  - docker build -t vjunloc/multi-nginx ./nginx
+  - docker build -t vjunloc/multi-server ./server
+  - docker build -t vjunloc/multi-worker ./worker
