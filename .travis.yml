@@ -20,3 +20,15 @@ after_success:
   - docker push vjunloc/multi-nginx
   - docker push vjunloc/multi-server
   - docker push vjunloc/multi-worker
+
+deploy:
+  provicder: elasticbeanstalk
+  region: "ap-southeast-2"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-2-992382785958"
+  bucket_path: "multi-docker"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
