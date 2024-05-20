@@ -25,7 +25,7 @@ deploy:
   provicder: elasticbeanstalk
   region: "ap-southeast-2"
   app: "multi-docker"
-  env: "MultiDocker-env"
+  env: "Multi-docker-env"
   bucket_name: "elasticbeanstalk-ap-southeast-2-992382785958"
   bucket_path: "multi-docker"
   on:
