@@ -15,10 +15,10 @@ const pgClient = new Pool({
   database: keys.pgDatabase,
   password: keys.pgPassword,
   port: keys.pgPort,
-  ssl:
-    process.env.NODE_ENV != "production"
-      ? false
-      : { rejectUnauthorized: false },
+  // ssl:
+  //   process.env.NODE_ENV != "production"
+  //     ? false
+  //     : { rejectUnauthorized: false },
 });
 pgClient.on("error", () => console.log("lost pg connection"));
 pgClient.on("connect", (client) => {
@@ -40,6 +40,7 @@ let redisPublisher;
         reconnectStrategy: () => 1000,
       },
     })
+    .on("error", (err) => console.log("Redis Client Error", err))
     .connect();
   redisPublisher = redisClient.duplicate();
   await redisPublisher.connect();
