@@ -16,18 +16,18 @@ jobs:
           docker build -t vjunloc/multi-client-test -f ./client/Dockerfile.dev ./client
           docker run -e CI=true vjunloc/multi-client-test npm test
       - name: Set Service Key
-        uses: "google-github-actions/auth@v0"
+        uses: "google-github-actions/auth@v2"
         with:
           credentials_json: "${{secrets.GKE_SA_KEY}}"
       - name: Set Project
-        uses: google-github-actions/setup-gcloud@v0
+        uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: multi-k8s-demo-424502
       - name: Auth
         run: |-
           gcloud --quiet auth configure-docker
       - name: Get Credentials
-        uses: google-github-actions/get-gke-credentials@v0
+        uses: google-github-actions/get-gke-credentials@v2
         with:
           cluster_name: multi-cluster-demo
           location: us-central1-a
